@@ -8,4 +8,9 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
   },
+  runtimeConfig: {
+    public: {
+      server: process.env.SERVER || 'http://localhost:4000', // ✅ add fallback
+    }
+  }
 });
