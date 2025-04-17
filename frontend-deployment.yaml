@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: peacepad-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: peacepad-frontend
+  template:
+    metadata:
+      labels:
+        app: peacepad-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: peacepad-frontend:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
