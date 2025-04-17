@@ -1,75 +1,25 @@
-# Nuxt Minimal Starter
+## Deploying the Nuxt Frontend to Kubernetes (Minikube)
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+These steps will containerize the frontend and run it locally inside a Kubernetes cluster powered by Minikube.
 
-## Setup
+---
 
-Make sure to install dependencies:
+### Prerequisites
 
-```bash
-# npm
-npm install
+- Docker installed and running (via Docker Desktop)
+- Minikube installed (`brew install minikube`)
+- Kubernetes CLI (`kubectl`) installed
 
-# pnpm
-pnpm install
+---
 
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+## Deploy Frontend to Minikube
 
 ```bash
-# npm
-npm run dev
+minikube start --driver=docker
+eval $(minikube docker-env)
+docker build -t peacepad-frontend:latest .
 
-# pnpm
-pnpm dev
+kubectl apply -f frontend-deployment.yaml
+kubectl apply -f frontend-service.yaml
 
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+minikube service peacepad-frontend-service
