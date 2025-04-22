@@ -141,21 +141,32 @@ const handleSubmit = async () => {
       Helping students and international renters find peaceful, noise-free homes.
     </p>
 
-    <div v-if="!sent" class="mt-8 flex flex-col items-center space-y-4">
-      <button
-        @click="showModal = true"
-        class="px-6 py-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-medium transition cursor-pointer"
-      >
-        Stay in Touch
-      </button>
+    <div v-if="!sent" class="mt-8 flex flex-col items-center space-y-3">
+  <div class="flex flex-col sm:flex-row gap-3">
+    <button
+      @click="showModal = true"
+      class="px-6 py-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-medium transition cursor-pointer"
+    >
+      Stay in Touch
+    </button>
 
-      <button
-        @click="scrollToContent"
-        class="text-white hover:text-blue-200 underline text-sm cursor-pointer"
-      >
-        Learn More
-      </button>
-    </div>
+    <NuxtLink
+      to="/signup"
+      class="px-6 py-2 rounded-md bg-white text-blue-600 hover:bg-gray-100 font-medium transition cursor-pointer border border-blue-600"
+    >
+      Create Account
+    </NuxtLink>
+  </div>
+
+  <button
+    @click="scrollToContent"
+    class="text-white hover:text-blue-200 underline text-sm cursor-pointer mt-2"
+  >
+    Learn More
+  </button>
+</div>
+
+
 
     <div class="mt-4 h-5 text-sm">
       <transition name="fade">
@@ -333,12 +344,30 @@ const handleSubmit = async () => {
     <p class="text-gray-600 text-lg mb-8">
       Ready to start your search or just want to talk? Share your info and we’ll be in touch.
     </p>
+    <div v-if="!sent" class="mt-8 flex flex-col items-center space-y-3">
+  <div class="flex flex-col sm:flex-row gap-3">
     <button
       @click="showModal = true"
-      class="cursor-pointer px-6 py-3 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-medium transition"
+      class="px-6 py-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-medium transition cursor-pointer"
     >
       Stay in Touch
     </button>
+
+    <NuxtLink
+      to="/signup"
+      class="px-6 py-2 rounded-md bg-white text-blue-600 hover:bg-gray-100 font-medium transition cursor-pointer border border-blue-600"
+    >
+      Create Account
+    </NuxtLink>
+  </div>
+
+  <button
+    @click="scrollToContent"
+    class="text-white hover:text-blue-200 underline text-sm cursor-pointer mt-2"
+  >
+    Learn More
+  </button>
+</div>
   </div>
 </section>
 
