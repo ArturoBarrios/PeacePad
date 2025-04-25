@@ -10,6 +10,8 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@fawmi/vue-google-maps": "github:fawmi/vue-google-maps",
+    "@googlemaps/js-api-loader": "^1.16.8",
     "@tailwindcss/vite": "^4.1.3",
     "jsonwebtoken": "^9.0.2",
     "nuxt": "^3.16.2",
