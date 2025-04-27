@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <header class="flex justify-between items-center px-6 py-4 bg-white ">
+  <div v-if="auth.isReady" class="min-h-screen flex flex-col">
+    <header class="flex justify-between items-center px-6 py-4 bg-white">
       <h1 class="text-xl font-bold text-gray-800">PeacePad</h1>
       <div class="flex gap-4">
-        <template v-if="user">
-          <span class="text-gray-700">Hi, {{ user.name || user.email }}</span>
+        <template v-if="auth.user">
+          <span class="text-gray-700">Hi, {{ auth.user.name || auth.user.email }}</span>
           <button @click="handleLogout" class="text-sm text-red-600 hover:underline cursor-pointer">
             Logout
           </button>
@@ -18,21 +18,25 @@
 
     <NuxtPage />
   </div>
+
+  <div v-else class="flex items-center justify-center min-h-screen">
+    <p class="text-gray-500">Loading...</p>
+  </div>
 </template>
 
 <script setup>
-import { onNuxtReady } from '#app'
+import { onMounted } from 'vue'
+import { useAuthStore } from '~/stores/auth'
 import { useRouter } from 'vue-router'
 import { useRuntimeConfig } from '#imports'
-import { useAuth } from '~/composables/useAuth'
 
-const { user, fetchUser } = useAuth()
-const config = useRuntimeConfig()
+const auth = useAuthStore()
 const router = useRouter()
+const config = useRuntimeConfig()
 const { server } = config.public
 
-onNuxtReady(async () => {
-  await fetchUser()
+onMounted(async () => {
+  await auth.fetchUser()
 })
 
 const handleLogout = async () => {
@@ -47,12 +51,12 @@ const handleLogout = async () => {
           mutation {
             logout
           }
-        `
-      }
+        `,
+      },
     })
 
     if (response?.data?.logout) {
-      user.value = null
+      auth.logout()
       router.push('/login')
     } else {
       console.error('Logout failed: server returned false')

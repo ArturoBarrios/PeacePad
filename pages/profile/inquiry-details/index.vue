@@ -44,28 +44,30 @@ const saveStep = () => {
   console.log(`Saving data for step: ${steps[currentStep.value].key}`)
 }
 </script>
-
 <template>
-  <div class="max-w-3xl mx-auto p-6">
-  <!-- Close Button -->
-   <!-- todo: when you close button, 
-    prompt user with modal if they haven't saved
-    -->
-<div class="flex justify-start mb-4">
-  <router-link
-    to="/profile"
-    class="bg-red-500 hover:bg-red-600 text-white text-sm font-medium px-4 py-2 rounded transition cursor-pointer"
-  >
-    Close
-  </router-link>
-</div>
+  <div class="max-w-3xl mx-auto p-6 space-y-6">
+    <!-- Top Action Bar: Close and Save (parallel, spread) -->
+    <div class="flex justify-between items-center">
+      <router-link
+        to="/profile"
+        class="bg-red-500 hover:bg-red-600 text-white text-sm font-medium px-6 py-2 rounded transition cursor-pointer"
+      >
+        Close
+      </router-link>
 
+      <button
+        @click="saveStep"
+        class="cursor-pointer px-6 py-2 rounded text-sm bg-green-500 text-white hover:bg-green-600"
+      >
+        Save
+      </button>
+    </div>
 
     <!-- Step Header Navigation -->
-    <div class="flex justify-between mb-8 border-b pb-4">
+    <div class="flex flex-wrap justify-center gap-4 border-b pb-6">
       <template v-for="(step, index) in steps" :key="step.key">
         <button
-          class="cursor-pointer text-sm sm:text-base font-medium focus:outline-none px-2 py-1 rounded transition"
+          class="cursor-pointer text-sm sm:text-base font-medium focus:outline-none px-3 py-2 rounded transition"
           :class="{
             'text-blue-600 border-b-2 border-blue-600': currentStep === index,
             'text-gray-500 hover:text-blue-500': currentStep !== index
@@ -77,37 +79,28 @@ const saveStep = () => {
       </template>
     </div>
 
-    <!-- Step Form Section -->
-    <div class="min-h-[200px]">
-      <component :is="componentMap[steps[currentStep].key]" />
-    </div>
-
-    <!-- Navigation Buttons -->
-    <div class="flex justify-between items-center mt-8">
+    <!-- Step Navigation Buttons: Back and Next (centered) -->
+    <div class="flex justify-end gap-4">
       <button
         @click="prevStep"
         :disabled="isFirst"
-        class="cursor-pointer px-4 py-2 rounded text-sm bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
+        class="cursor-pointer px-6 py-2 rounded text-sm bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
       >
         Back
       </button>
 
-      <div class="space-x-2">
-        <button
-          @click="saveStep"
-          class="cursor-pointer px-4 py-2 rounded text-sm bg-blue-500 text-white hover:bg-blue-600"
-        >
-          Save
-        </button>
+      <button
+        @click="nextStep"
+        :disabled="isLast"
+        class="cursor-pointer px-6 py-2 rounded text-sm bg-blue-500 text-white hover:bg-blue-600 disabled:opacity-50"
+      >
+        Next
+      </button>
+    </div>
 
-        <button
-          @click="nextStep"
-          :disabled="isLast"
-          class="cursor-pointer px-4 py-2 rounded text-sm bg-blue-500 text-white hover:bg-blue-600 disabled:opacity-50"
-        >
-          Next
-        </button>
-      </div>
+    <!-- Step Form Section -->
+    <div class="min-h-[200px]">
+      <component :is="componentMap[steps[currentStep].key]" />
     </div>
   </div>
 </template>

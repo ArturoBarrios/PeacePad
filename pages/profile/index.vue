@@ -4,7 +4,30 @@ import NoProfiles from '~/components/profile/NoProfiles.vue'
 import ProfileDashboard from '~/components/profile/ProfileDashboard.vue'
 
 // Source of truth for profiles
-const profiles = ref([]) // ← Set this to [] to test empty state
+const profiles = ref([
+  {
+    id: 1,
+    name: 'Profile 1',
+    preferences: {
+      lifestyle: {},
+      housing: {},
+      noise: {},
+      priorities: {},
+      locations: {}
+    }
+  },
+  {
+    id: 2,
+    name: 'Profile 2',
+    preferences: {
+      lifestyle: {},
+      housing: {},
+      noise: {},
+      priorities: {},
+      locations: {}
+    }
+  }
+]) // ← Set this to [] to test empty state
 
 const hasProfiles = computed(() => profiles.value.length > 0)
 </script>

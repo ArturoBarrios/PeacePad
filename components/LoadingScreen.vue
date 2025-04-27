@@ -1,6 +1,5 @@
 <template>
-    <div class="flex items-center justify-center min-h-screen bg-white">
-      <span class="text-gray-500 text-lg animate-pulse">Loading PeacePad...</span>
-    </div>
-  </template>
-  
+  <div class="min-h-screen flex items-center justify-center">
+    <div class="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500"></div>
+  </div>
+</template>

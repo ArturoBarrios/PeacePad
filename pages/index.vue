@@ -1,21 +1,13 @@
-<script setup>
-import { ref, onMounted } from 'vue'
-import { useAuth } from '~/composables/useAuth'
-import HomeLanding from '~/components/HomeLanding.vue'
-import HomeDashboard from '~/components/HomeDashboard.vue'
+<script setup lang="ts">
+import { navigateTo } from '#app'
 
-const { user, fetchUser } = useAuth()
-const isLoading = ref(true)
-
-onMounted(async () => {
-  await fetchUser()
-  isLoading.value = false
-})
+// Redirect to /profile immediately
+navigateTo('/profile', { replace: true })
 </script>
 
 <template>
-  <div>
-    <LoadingScreen v-if="isLoading" />
-    <component v-else :is="user ? HomeDashboard : HomeLanding" />
+  <!-- Optional fallback if device/network is slow -->
+  <div class="flex items-center justify-center min-h-screen">
+    <p class="text-gray-500">Redirecting...</p>
   </div>
 </template>
